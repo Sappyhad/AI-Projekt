@@ -21,6 +21,10 @@ switch ($action) {
         $controller = new \App\Controller\LoginController();
         $view = $controller->test($_REQUEST['email'] ?? null, $_REQUEST['password'] ?? null, $templating, $router);
         break;
+    case 'building-index':
+        $controller = new \App\Controller\BuildingController();
+        $view = $controller->indexAction($templating, $router);
+        break;
     default:
         $view = 'Not found';
         break;
