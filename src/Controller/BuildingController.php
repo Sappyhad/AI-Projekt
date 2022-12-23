@@ -41,5 +41,13 @@ class BuildingController
         return $html;
     }
 
+    public function editRoomIndexAction(Templating $templating, Router $router): ?string
+    {
+        $html = $templating->render('building/edit-room.html.php', [
+            'router' => $router,
+        ]);
+        return $html;
+    }
+
 
 }

@@ -18,8 +18,12 @@ ob_start(); ?>
             <rect width="800" height="400" style="fill:white;stroke-width:5;stroke:rgb(0,0,0)"/>
 
             <!--     SALA 01       -->
-            <rect id="test" class="test" width="150" height="150" style="fill:white;stroke-width:5;stroke:black"/>
+            <rect id="s1" width="150" height="150" style="fill:white;stroke-width:5;stroke:black"/>
             <text x="60" y="75" fill="black" font-weight="bold">01</text>
+            <!--     SALA 02       -->
+            <rect id="s2" width="150" height="150" x="150" y="0" style="fill:white;stroke-width:5;stroke:black"/>
+            <text x="210" y="75" fill="black" font-weight="bold">02</text>
+
         </svg>
 
         <div id="info" style="float: right ;"></div>
@@ -29,7 +33,7 @@ ob_start(); ?>
 
 <script>
 
-    let room1 = document.getElementById("test");
+    let room1 = document.getElementById("s1");
 
     function roomHoverIn() {
         this.style.cursor = "pointer";
@@ -70,6 +74,7 @@ ob_start(); ?>
 
     room1.addEventListener("mouseover", roomHoverIn);
     room1.addEventListener("mouseout", roomHoverOut)
+
 
 
 </script>

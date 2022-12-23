@@ -19,7 +19,7 @@ switch ($action) {
         break;
     case 'login':
         $controller = new \App\Controller\LoginController();
-        $view = $controller->test($_REQUEST['email'] ?? null, $_REQUEST['password'] ?? null, $templating, $router);
+        $view = $controller->login($_REQUEST['email'] ?? null, $_REQUEST['password'] ?? null, $templating, $router);
         break;
     case 'building-index':
         $controller = new \App\Controller\BuildingController();
@@ -76,6 +76,22 @@ switch ($action) {
     case 'roomInfo-index':
         $controller = new \App\Controller\BuildingController();
         $view = $controller->roomInfoAction($templating, $router);
+        break;
+    case 'employees-index':
+        $controller = new \App\Controller\EmployeesController();
+        $view = $controller->indexAction($templating, $router);
+        break;
+    case 'edit-room-index':
+        $controller = new \App\Controller\BuildingController();
+        $view = $controller->editRoomIndexAction($templating, $router);
+        break;
+    case 'employee-edit-index':
+        $controller = new \App\Controller\EmployeesController();
+        $view = $controller->editEmployee($templating, $router);
+        break;
+    case 'employee-add-index':
+        $controller = new \App\Controller\EmployeesController();
+        $view = $controller->addEmployee($templating, $router);
         break;
     default:
         $view = 'Not found';

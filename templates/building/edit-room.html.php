@@ -13,14 +13,23 @@ ob_start(); ?>
     <a type="button" style="text-align:left; margin: 10px; font-size: 25px;" href="<?= $router->generatePath('wi1-index') ?>">Wróć</a>
 
     <div style="text-align: center; padding-top: 20px;">
-        <p>Sala: 001</p>
-        <p>Prowadzący: XYZ</p>
-        <p>Link do Zajęć: XYZ</p>
-        <p>Aktualne zajęcia: XYZ</p>
-    </div>
+        <form method="post">
+            <label>Sala:</label>
+            <input type="text" name="room">
+            <br>
 
-    <div style="text-align: right;font-size: 24px;">
-        <a href="<?= $router->generatePath('edit-room-index') ?>">Edytuj</a>
+            <label>Prowadzący:</label>
+            <input type="text" name="employee">
+            <br>
+
+            <label>Link do Zajęć:</label>
+            <input type="text" name="schedule">
+            <br>
+
+            <input type="submit" >
+            <br>
+        </form>
+
     </div>
 
 <?php $main = ob_get_clean();

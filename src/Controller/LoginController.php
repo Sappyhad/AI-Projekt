@@ -18,10 +18,10 @@ class LoginController
     }
 
 
-    public function test( $email,  $password,Templating $templating, Router $router): ?string
+    public function login($email, $password, Templating $templating, Router $router): ?string
     {
 
-        $user = User::find($email, $password);
+        $user = User::find($email);
 
         if($user == null){
             $html = $templating->render('login/user-not-exist.html.php', [

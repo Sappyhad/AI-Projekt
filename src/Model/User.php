@@ -11,7 +11,7 @@ class User
     private ?string $password = null;
 
 
-    public static function find($email, $password): ?User
+    public static function find($email): ?User
     {
         $pdo = new \PDO(Config::get('db_dsn'), Config::get('db_user'), Config::get('db_pass'));
         $sql = 'SELECT * FROM user WHERE email = :email';
