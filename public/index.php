@@ -25,6 +25,58 @@ switch ($action) {
         $controller = new \App\Controller\BuildingController();
         $view = $controller->indexAction($templating, $router);
         break;
+    case 'wi1-index':
+        $controller = new \App\Controller\BuildingController();
+        $view = $controller->indexBuildingAction($templating, $router, 1);
+        break;
+    case 'wi2-index':
+        $controller = new \App\Controller\BuildingController();
+        $view = $controller->indexBuildingAction($templating, $router, 2);
+        break;
+    case 'wi1-floor0-index':
+        $controller = new \App\Controller\BuildingController();
+        $view = $controller->indexFloorInBuilding($templating, $router, 1,0);
+        break;
+    case 'wi1-floor-1-index':
+        $controller = new \App\Controller\BuildingController();
+        $view = $controller->indexFloorInBuilding($templating, $router, 1,-1);
+        break;
+    case 'wi1-floor1-index':
+        $controller = new \App\Controller\BuildingController();
+        $view = $controller->indexFloorInBuilding($templating, $router, 1,1);
+        break;
+    case 'wi1-floor2-index':
+        $controller = new \App\Controller\BuildingController();
+        $view = $controller->indexFloorInBuilding($templating, $router, 1,2);
+        break;
+    case 'wi1-floor3-index':
+        $controller = new \App\Controller\BuildingController();
+        $view = $controller->indexFloorInBuilding($templating, $router, 1,3);
+        break;
+    case 'wi2-floor0-index':
+        $controller = new \App\Controller\BuildingController();
+        $view = $controller->indexFloorInBuilding($templating, $router, 2,0);
+        break;
+    case 'wi2-floor-1-index':
+        $controller = new \App\Controller\BuildingController();
+        $view = $controller->indexFloorInBuilding($templating, $router, 2,-1);
+        break;
+    case 'wi2-floor1-index':
+        $controller = new \App\Controller\BuildingController();
+        $view = $controller->indexFloorInBuilding($templating, $router, 2,1);
+        break;
+    case 'wi2-floor2-index':
+        $controller = new \App\Controller\BuildingController();
+        $view = $controller->indexFloorInBuilding($templating, $router, 2,2);
+        break;
+    case 'wi2-floor3-index':
+        $controller = new \App\Controller\BuildingController();
+        $view = $controller->indexFloorInBuilding($templating, $router, 2,3);
+        break;
+    case 'roomInfo-index':
+        $controller = new \App\Controller\BuildingController();
+        $view = $controller->roomInfoAction($templating, $router);
+        break;
     default:
         $view = 'Not found';
         break;
