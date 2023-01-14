@@ -5,7 +5,7 @@ $config = new \App\Service\Config();
 
 $templating = new \App\Service\Templating();
 $router = new \App\Service\Router();
-
+session_start();
 $action = $_REQUEST['action'] ?? null;
 switch ($action) {
     case 'post-index':
@@ -16,6 +16,10 @@ switch ($action) {
     case 'login-index':
         $controller = new \App\Controller\LoginController();
         $view = $controller->indexAction($templating, $router);
+        break;
+    case 'logout-index':
+        $controller = new \App\Controller\LoginController();
+        $view = $controller->logout($templating, $router);
         break;
     case 'login':
         $controller = new \App\Controller\LoginController();
@@ -78,20 +82,45 @@ switch ($action) {
         $view = $controller->roomInfoAction($templating, $router);
         break;
     case 'employees-index':
-        $controller = new \App\Controller\EmployeesController();
+        $controller = new \App\Controller\EmployeeController();
         $view = $controller->indexAction($templating, $router);
         break;
-    case 'edit-room-index':
-        $controller = new \App\Controller\BuildingController();
-        $view = $controller->editRoomIndexAction($templating, $router);
+    case 'room-edit-index':
+        if (! $_REQUEST['id']) {
+            break;
+        }
+        $controller = new \App\Controller\RoomController();
+        $view = $controller->editRoom($_REQUEST['id'], $_REQUEST['room'] ?? null, $templating, $router);
         break;
+    case 'room-add-index':
+        $controller = new \App\Controller\RoomController();
+        $view = $controller->addRoom($_REQUEST['room'] ?? null, $templating, $router);
+        break;
+    case 'room-delete':
+        if (! $_REQUEST['id']) {
+            break;
+        }
+        $controller = new \App\Controller\RoomController();
+        $view = $controller->deleteRoom($_REQUEST['id'], $router);
+        break;
+
     case 'employee-edit-index':
-        $controller = new \App\Controller\EmployeesController();
-        $view = $controller->editEmployee($templating, $router);
+        if (! $_REQUEST['id']) {
+            break;
+        }
+        $controller = new \App\Controller\EmployeeController();
+        $view = $controller->editEmployee($_REQUEST['id'], $_REQUEST['employee'] ?? null, $templating, $router);
         break;
     case 'employee-add-index':
-        $controller = new \App\Controller\EmployeesController();
-        $view = $controller->addEmployee($templating, $router);
+        $controller = new \App\Controller\EmployeeController();
+        $view = $controller->addEmployee($_REQUEST['employee'] ?? null, $templating, $router);
+        break;
+    case 'employee-delete':
+        if (! $_REQUEST['id']) {
+            break;
+        }
+        $controller = new \App\Controller\EmployeeController();
+        $view = $controller->deleteEmployee($_REQUEST['id'], $router);
         break;
     default:
         $view = 'Not found';

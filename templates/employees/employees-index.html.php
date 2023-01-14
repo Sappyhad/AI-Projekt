@@ -1,7 +1,7 @@
 <?php
 
+/** @var \App\Model\Employee[] $employees */
 /** @var \App\Service\Router $router */
-
 $title = 'Zarządzaj pracownikami';
 
 ob_start(); ?>
@@ -32,25 +32,25 @@ ob_start(); ?>
                     <th>Usuń</th>
                 </tr>
                 </thead>
-
             <!-- TUTAJ WYSWIETLANIE DANYCH  -->
                 <tr>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td>test</td>
-                    <td><a href="<?= $router->generatePath('employee-edit-index') ?>">edytuj</a></td>
-                    <td><a href="<?= $router->generatePath('employee-delete') ?>">usuń</a></td>
+                <?php foreach ($employees as $employeee): ?>
+                    <td><?= $employeee->getId() ?></td>
+                    <td><?= $employeee->getName() ?></td>
+                    <td><?= $employeee->getLastName() ?></td>
+                    <td><?= $employeee->getPosition() ?></td>
+                    <td><?= $employeee->getSchedule() ?></td>
+                    <td><a href="<?= $router->generatePath('employee-edit-index', ['id' => $employeee->getId()]) ?>">edytuj</a></td>
+                    <td><a href="<?= $router->generatePath('employee-delete', ['id' => $employeee->getId()]) ?>">usuń</a></td>
                 </tr>
+        <?php endforeach; ?>
             </table>
         </div>
 
-        <a style="float: right; margin-top: 20px;" href="<?= $router->generatePath('employee-add-index') ?>">Dodaj pracownika</a>
+        <a style="float: right; margin-top: 20px;" href="<?= $router->generatePath('employee-add-index' )?>">Dodaj pracownika</a>
 
 
     </ul>
 
 <?php $main = ob_get_clean();
-
 include __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'base.html.php';

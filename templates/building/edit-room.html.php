@@ -1,37 +1,38 @@
 <?php
 
+/** @var \App\Model\Room $room */
 /** @var \App\Service\Router $router */
 
-$title = 'Wi1 Sala 001';
+$title = "Edytujesz salę o numerze: {$room->getName()}";
 $bodyClass = 'index';
 
 ob_start(); ?>
-    <div style="margin:auto; text-align: center;">
-        <h1>WI1 Piętro 0</h1>
-    </div>
+    <style>
+        table, th, td {
+            border: 1px solid;
+        }
 
-    <a type="button" style="text-align:left; margin: 10px; font-size: 25px;" href="<?= $router->generatePath('wi1-index') ?>">Wróć</a>
-
-    <div style="text-align: center; padding-top: 20px;">
-        <form method="post">
-            <label>Sala:</label>
-            <input type="text" name="room">
-            <br>
-
-            <label>Prowadzący:</label>
-            <input type="text" name="employee">
-            <br>
-
-            <label>Link do Zajęć:</label>
-            <input type="text" name="schedule">
-            <br>
-
-            <input type="submit" >
-            <br>
-        </form>
-
-    </div>
-
+        table {
+            width: 100%;
+        }
+    </style>
+    <h1><?= $title ?></h1>
+    <form action="<?= $router->generatePath('room-edit-index') ?>" method="post" class="edit-form">
+        <?php require __DIR__ . DIRECTORY_SEPARATOR . 'room_form.html.php'; ?>
+        <input type="hidden" name="action" value="room-edit-index">
+        <input type="hidden" name="id" value="<?= $room->getId() ?>">
+    </form>
+    <ul class="action-list">
+        <li>
+            <a href="<?= $router->generatePath('wi1-index') ?>">Wróć</a></li>
+        <li>
+            <form action="<?= $router->generatePath('room-delete') ?>" method="post">
+                <input type="submit" value="Usuń" onclick="return confirm('Jestes pewien, że chcesz usunąć?')">
+                <input type="hidden" name="action" value="room-delete">
+                <input type="hidden" name="id" value="<?= $room->getId() ?>">
+            </form>
+        </li>
+    </ul>
 <?php $main = ob_get_clean();
 
 include __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'base.html.php';

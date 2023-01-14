@@ -1,6 +1,6 @@
 <?php
 
-/** @var \App\Model\Post $post */
+
 /** @var \App\Service\Router $router */
 
 $title = 'Login form';
@@ -13,10 +13,10 @@ ob_start(); ?>
 
         <form action="<?= $router->generatePath('login') ?>" method="post">
             <p>Email:</p>
-            <input type="text" name="email">
+            <input type="text" name="email" required>
 
             <p>Hasło:</p>
-            <input type="password" name="password">
+            <input type="password" name="password" required>
 
             <br>
             <input type="submit" value="Zaloguj">

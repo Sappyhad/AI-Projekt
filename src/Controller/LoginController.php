@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Model\Post;
+
 use App\Model\User;
 use App\Service\Router;
 use App\Service\Templating;
@@ -36,9 +36,17 @@ class LoginController
             ]);
             return $html;
         }
-
-
+        
+        $_SESSION['email'] = $user->getEmail();
         $controller = new \App\Controller\MainController();
         return $controller->indexAction($templating, $router);
+    }
+
+    public function logout(Templating $templating, Router $router): ?string{
+        session_destroy();
+        $html = $templating->render('login/login.html.php', [
+            'router' => $router,
+        ]);
+        return $html;
     }
 }
