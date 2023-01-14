@@ -1,12 +1,18 @@
 <?php
-
+$welcome = " ";
+if (!isset($_SESSION['email'])){
+    $welcome = "<h1>Witaj nieznajomy</h1>";
+    }
+else{
+    $welcome="<h1>Witaj ".$_SESSION['email']."</h1>";
+}
 
 $title = 'Home';
 
 ob_start(); ?>
 
     <ul class="index-list">
-        <h1>Hello</h1>
+      <?php echo $welcome; ?>
 
 
     </ul>

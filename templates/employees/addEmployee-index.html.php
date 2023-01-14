@@ -1,5 +1,6 @@
 <?php
 
+/** @var \App\Model\Employee[] $employee */
 /** @var \App\Service\Router $router */
 
 $title = 'Dodaj pracownika';
@@ -15,40 +16,13 @@ ob_start(); ?>
         }
     </style>
 
-    <ul class="index-list">
-        <div style="text-align: center">
-            <h1>Dodaj pracownika</h1>
+<h1><?= $title ?></h1>
+    <form action="<?= $router->generatePath('employee-add-index') ?>" method="post" class="edit-form">
+        <?php require __DIR__ . DIRECTORY_SEPARATOR . 'empl_form.html.php'; ?>
+        <input type="hidden" name="action" value="employee-add-index">
+    </form>
 
-            <form method="post">
-                <label>Imię:</label>
-                <input type="text" name="firstName">
-                <br>
-
-                <label>Nazwisko:</label>
-                <input type="text" name="lastName">
-                <br>
-
-                <label>Stanowsko:</label>
-                <input type="text" name="position">
-                <br>
-
-                <label>Stanowsko:</label>
-                <input type="text" name="position">
-                <br>
-
-                <label>Stanowsko:</label>
-                <input type="text" name="schedule">
-                <br>
-
-                <input type="submit" >
-                <br>
-            </form>
-
-        </div>
-
-
-    </ul>
-
+    <a href="<?= $router->generatePath('employees-index') ?>">Wróć do listy</a>
 <?php $main = ob_get_clean();
 
 include __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'base.html.php';
