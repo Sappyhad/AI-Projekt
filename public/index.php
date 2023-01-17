@@ -78,8 +78,13 @@ switch ($action) {
         $view = $controller->indexFloorInBuilding($templating, $router, 2,3);
         break;
     case 'roomInfo-index':
-        $controller = new \App\Controller\BuildingController();
-        $view = $controller->roomInfoAction($templating, $router);
+        if (!$_REQUEST['id']) {
+            $controller = new \App\Controller\RoomController();
+            $view = $controller->roomInfo(0, $templating, $router);
+        break;
+        }
+        $controller = new \App\Controller\RoomController();
+        $view = $controller->roomInfo($_REQUEST['id'], $templating, $router);
         break;
     case 'employees-index':
         $controller = new \App\Controller\EmployeeController();

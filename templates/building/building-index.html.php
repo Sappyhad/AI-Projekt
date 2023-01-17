@@ -1,7 +1,10 @@
 <?php
+$add_room_button=" ";
+if (isset($_SESSION['email'])) {
+    $add_room_button="<a type=button style=text-align:left; margin: 10px; font-size: 25px; href=".$router->generatePath('room-add-index').">Dodaj salę</a>";
+}
 
-
-$title = 'Building';
+$title = 'Budynki WI ZUT';
 
 
 ob_start(); ?>
@@ -26,7 +29,8 @@ ob_start(); ?>
 
 
     <ul class="index-list">
-        <h1>Building</h1>
+        <?php echo $add_room_button ?>
+        <h1>Budynki WI ZUT</h1>
 
         <div id="map" style="float: left;"></div>
 

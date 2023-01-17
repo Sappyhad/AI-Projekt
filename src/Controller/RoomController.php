@@ -18,6 +18,24 @@ class RoomController
         return $html;
     }
 
+    public function roomInfo(int $roomId, Templating $templating, Router $router): ?string
+    {
+        if (!$roomId){
+            $room = null;
+        } else {
+            $room = Room::find($roomId);
+            if (!$room) {
+                $room = null;
+            }
+        }
+
+        $html = $templating->render('building/roomInfo.html.php', [
+            'room' => $room,
+            'router' => $router,
+        ]);
+        return $html;
+    }
+
     public function editRoom(int $roomId, ?array $requestRoom, Templating $templating, Router $router): ?string
     {
         $room = Room::find($roomId);

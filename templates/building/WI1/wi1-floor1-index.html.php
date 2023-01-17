@@ -1,11 +1,15 @@
 <?php
 
 /** @var \App\Service\Router $router */
-
+$add_room_button=" ";
+if (isset($_SESSION['email'])) {
+    $add_room_button="<a type=button style=text-align:left; margin: 10px; font-size: 25px; href=".$router->generatePath('room-add-index').">Dodaj salę</a>";
+}
 $title = 'Wi1 Floor 1';
 $bodyClass = 'index';
 
 ob_start(); ?>
+    <?php echo $add_room_button ?>
     <div style="margin:auto; text-align: center;">
         <h1>WI1 Piętro 1</h1>
     </div>
