@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Controller;
-
+use App\Exception\NotFoundException;
+use App\Model\Room;
 use App\Service\Router;
 use App\Service\Templating;
 
@@ -33,17 +34,39 @@ class BuildingController
         return $html;
     }
 
-    public function roomInfoAction(Templating $templating, Router $router): ?string
+    public function roomInfoAction(int $roomId, Templating $templating, Router $router): ?string
     {
+        $room = Room::find($roomId);
+        if (! $room) {
+            throw new NotFoundException("Missing room with id $roomId");
+        }
+
         $html = $templating->render('building/roomInfo.html.php', [
+            'room' => $room,
             'router' => $router,
         ]);
         return $html;
     }
 
-    public function editRoomIndexAction(Templating $templating, Router $router): ?string
+    public function editRoomIndexAction(int $roomId, ?array $requestRoom, Templating $templating, Router $router): ?string
     {
+        $room = Room::find($roomId);
+        if (! $room) {
+            throw new NotFoundException("Missing room with id $roomId");
+        }
+
+        if ($requestRoom) {
+            $room->fill($requestRoom);
+            // @todo missing validation
+            $room->save();
+
+            $path = $router->generatePath('roomInfo-index');
+            $router->redirect($path);
+            return null;
+        }
+
         $html = $templating->render('building/edit-room.html.php', [
+            'room' => $room,
             'router' => $router,
         ]);
         return $html;

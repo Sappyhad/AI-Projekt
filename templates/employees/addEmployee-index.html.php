@@ -1,5 +1,7 @@
 <?php
-
+if (!isset($_SESSION['email'])) {
+    header("location:index.php?action=login-index");
+}
 /** @var \App\Model\Employee[] $employee */
 /** @var \App\Service\Router $router */
 

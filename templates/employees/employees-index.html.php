@@ -3,7 +3,11 @@
 /** @var \App\Model\Employee[] $employees */
 /** @var \App\Service\Router $router */
 $title = 'Zarządzaj pracownikami';
-
+$addEmployee=$delEmployee=$editEmployee=$editCol=$delCol=" ";
+if (isset($_SESSION['email'])) {
+    $editCol = "<th>Edycja</th>";
+    $delCol = "<th>Usuń</th>";
+}
 ob_start(); ?>
     <style>
         table, th, td {
@@ -28,8 +32,8 @@ ob_start(); ?>
                     <th>Nazwisko</th>
                     <th>Stanowisko</th>
                     <th>Plan Zajęc</th>
-                    <th>Edycja</th>
-                    <th>Usuń</th>
+                    <?php echo $editCol ?>
+                    <?php echo $delCol ?>
                 </tr>
                 </thead>
             <!-- TUTAJ WYSWIETLANIE DANYCH  -->
@@ -40,14 +44,20 @@ ob_start(); ?>
                     <td><?= $employeee->getLastName() ?></td>
                     <td><?= $employeee->getPosition() ?></td>
                     <td><?= $employeee->getSchedule() ?></td>
-                    <td><a href="<?= $router->generatePath('employee-edit-index', ['id' => $employeee->getId()]) ?>">edytuj</a></td>
-                    <td><a href="<?= $router->generatePath('employee-delete', ['id' => $employeee->getId()]) ?>">usuń</a></td>
+                    <?php if (isset($_SESSION['email'])) {
+                        echo "<td><a href=" . $router->generatePath('employee-edit-index', ['id' => $employeee->getId()]) . ">edytuj</a></td>";
+                    }?>
+                    <?php if (isset($_SESSION['email'])) {
+                        echo "<td><a href=" . $router->generatePath('employee-delete', ['id' => $employeee->getId()]) . ">usuń</a></td>";
+                    } ?>
                 </tr>
         <?php endforeach; ?>
             </table>
         </div>
 
-        <a style="float: right; margin-top: 20px;" href="<?= $router->generatePath('employee-add-index' )?>">Dodaj pracownika</a>
+        <?php if (isset($_SESSION['email'])) {
+            echo "<a style=float: right; margin-top: 20px; href=" . $router->generatePath('employee-add-index') . ">Dodaj pracownika</a>";
+        }?>
 
 
     </ul>

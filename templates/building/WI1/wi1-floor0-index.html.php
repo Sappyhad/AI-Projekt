@@ -3,7 +3,10 @@
 use App\Model\Room;
 
 /** @var \App\Service\Router $router */
-
+$add_room_button=" ";
+if (isset($_SESSION['email'])) {
+    $add_room_button="<a type=button style=text-align:left; margin: 10px; font-size: 25px; href=".$router->generatePath('room-add-index').">Dodaj salę</a>";
+}
 $title = 'Wi1 Floor 0';
 $bodyClass = 'index';
 
@@ -22,8 +25,9 @@ function myphpfunction($id){
     echo $mydata;
     return $mydata;
 }?>
-
+    <?php echo $add_room_button ?>
     <div style="margin:auto; text-align: center;">
+    
         <h1>WI1 Piętro 0</h1>
     </div>
 
@@ -121,20 +125,21 @@ function myphpfunction($id){
 
 
         roomNumber.textContent = "Sala: " + roomNumberValue;
+
         if (id.substr(0, 7)=="pietro1"){
             nextFloor.textContent = "Piętro 1";
             displayInfo.appendChild(nextFloor);
-            document.getElementById(id).addEventListener("click", event=>{location.href='index.php?action=wi1-floor1-index';});
+            addEventListener("click", event=>{location.href='index.php?action=wi1-floor1-index';});
         }
         else if (id.substr(0, 9)=="katakumby"){
             nextFloor.textContent = "Piętro -1";
             displayInfo.appendChild(nextFloor);
-            document.getElementById(id).addEventListener("click", event=>{location.href='index.php?action=wi1-floor-1-index';});
+            addEventListener("click", event=>{location.href='index.php?action=wi1-floor-1-index';});
         }
         else if (id=="wyjscie"){
             nextFloor.textContent = "Wyjście";
             displayInfo.appendChild(nextFloor);
-            document.getElementById(id).addEventListener("click", event=>{location.href='index.php?action=building-index';});
+            addEventListener("click", event=>{location.href='index.php?action=building-index';});
         }else{
             teacher.textContent = "Prowadzący: " + teacherValue;
             scheduleLink.textContent = "Link do Zajęć: " + scheduleLinkValue;
@@ -143,7 +148,8 @@ function myphpfunction($id){
             displayInfo.appendChild(teacher);
             displayInfo.appendChild(scheduleLink);
             displayInfo.appendChild(currentClass);
-            addEventListener("click", event=>{location.href='index.php?action=roomInfo-index';});
+            let link="index.php?action=roomInfo-index&id="+roomNumberValue;
+            addEventListener("click", event=>{location.href=link;});
         }
         
         displayInfo.id = "displayInfo";
