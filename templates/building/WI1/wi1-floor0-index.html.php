@@ -12,7 +12,8 @@ $bodyClass = 'index';
 
 
 
-ob_start(); 
+ob_start();
+# TODO: poprawić funckję myphpfunction
 function myphpfunction($id){
     $xd = "18";
     $room = Room::find_by_name($id);
@@ -111,7 +112,7 @@ function myphpfunction($id){
         document.getElementById(id).style.cursor = "pointer";
         
         
-        
+        // TODO: tu też (argument nie tak przekazywany)
         var lol="<?php myphpfunction('"+roomNumberValue+"')?>";
         console.log(lol);
         // Nie wszystkie pola są zawsze używane w zależności od sali!

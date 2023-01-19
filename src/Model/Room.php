@@ -157,6 +157,7 @@ class Room
         return $rooms;
     }
 
+
     public function save(): void
     {
         $pdo = new \PDO(Config::get('db_dsn'), Config::get('db_user'), Config::get('db_pass'));
