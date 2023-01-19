@@ -23,7 +23,7 @@ class RoomController
         if (!$roomId){
             $room = null;
         } else {
-            $room = Room::find($roomId);
+            $room = Room::find_by_name($roomId);
             if (!$room) {
                 $room = null;
             }

@@ -14,6 +14,7 @@ else{
         <?php echo $login; ?>
     <li><a href="<?= $router->generatePath('building-index') ?>">Budynek</a></li>
     <li><a href="<?= $router->generatePath('employees-index') ?>">Pracownicy</a></li>
+    <li><a href="<?= $router->generatePath('employee-import') ?>">Import</a></li>
     <li>
         <form action="<?= $router->generatePath('search') ?>" method="post">
             <input type="text" name="search-value" placeholder="szukaj">

@@ -25,6 +25,10 @@ switch ($action) {
         $controller = new \App\Controller\LoginController();
         $view = $controller->login($_REQUEST['email'] ?? null, $_REQUEST['password'] ?? null, $templating, $router);
         break;
+    case 'employee-import':
+        $controller = new \App\Controller\ImportController();
+        $view = $controller->indexAction($templating, $router);
+        break;
     case 'building-index':
         $controller = new \App\Controller\BuildingController();
         $view = $controller->indexAction($templating, $router);
