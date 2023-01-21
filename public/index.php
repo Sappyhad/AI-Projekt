@@ -1,4 +1,7 @@
 <?php
+header('Acces-Control-Allow-Origin: *');
+header('Acces-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
+header('Acces-Control-Allow-Headers: Content-type, X-Auth-Token, Origin, Authorization');
 require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'autoload.php';
 
 $config = new \App\Service\Config();
@@ -90,6 +93,15 @@ switch ($action) {
         $controller = new \App\Controller\RoomController();
         $view = $controller->roomInfo($_REQUEST['id'], $templating, $router);
         break;
+    case 'roomInfo-api':
+        if (!$_REQUEST['id']) {
+            $controller = new \App\Controller\RoomController();
+            $view = $controller->roomInfo(0, $templating, $router);
+        break;
+        }
+            $controller = new \App\Controller\RoomController();
+            $view = $controller->roomInfoapi($_REQUEST['id'], $templating, $router);
+            break;
     case 'employees-index':
         $controller = new \App\Controller\EmployeeController();
         $view = $controller->indexAction($templating, $router);

@@ -36,6 +36,23 @@ class RoomController
         return $html;
     }
 
+    public function roomInfoapi(int $roomId, Templating $templating, Router $router): ?string
+    {
+        if (!$roomId){
+            $room = null;
+        } else {
+            $room = Room::find_by_name($roomId);
+            if (!$room) {
+                $room = null;
+            }
+        }
+        $response = [];
+        if ($room){
+            $response["room"] = $room->toArray();
+        }
+
+        return json_encode($response);
+    }
     public function editRoom(int $roomId, ?array $requestRoom, Templating $templating, Router $router): ?string
     {
         $room = Room::find($roomId);

@@ -109,6 +109,20 @@ class Room
         return $this;
     }
 
+    public function toArray(): array
+    {
+        $data = [];
+        if ($this->getId()){
+            $data["id"] = $this->getId();
+            $data["name"] = $this->getName();
+            $data["teachername"] = $this->getTeacherName();
+            $data["teacherlastname"] = $this->getTeacherLastName();
+            $data["linktosubjects"] = $this->getLinkToSubjects();
+        }
+        
+        return $data;
+    }
+
     public static function findAll(): array
     {
         $pdo = new \PDO(Config::get('db_dsn'), Config::get('db_user'), Config::get('db_pass'));

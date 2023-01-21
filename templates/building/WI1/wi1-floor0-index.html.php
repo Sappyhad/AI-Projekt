@@ -1,5 +1,7 @@
 <?php
-
+header('Acces-Control-Allow-Origin: *');
+header('Acces-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
+header('Acces-Control-Allow-Headers: Content-type, X-Auth-Token, Origin, Authorization');
 use App\Model\Room;
 
 /** @var \App\Service\Router $router */
@@ -87,6 +89,8 @@ function myphpfunction($id){
 
 
 <script>
+    //import fetch from 'node-fetch';
+    let link=window.location.host+'/index.php?action=roomInfo-api&id={name}';
     
     function idRoom(idr){
         room1 = document.getElementById(idr);
@@ -112,9 +116,21 @@ function myphpfunction($id){
         document.getElementById(id).style.cursor = "pointer";
         
         
-        // TODO: tu też (argument nie tak przekazywany)
-        var lol="<?php myphpfunction('"+roomNumberValue+"')?>";
-        console.log(lol);
+        // TODO: tu też (argument nie tak przekazywany) ajaxem, potem fetch tak jak na labka z pogoda
+        let url= link.replace("{name}",roomNumberValue );
+        //var HMLHttpRequest= require(xhr2);
+        //  let req= new XMLHttpRequest();
+        //  req.open("GET", url,);
+        //  req.addEventListener("load", ()=>{
+        //      console.log(JSON.parse(req.responseText));
+        //  });
+        //  req.send();
+        fetch(url).the((response)=>{
+             console.log(response);
+        });
+        //console.log(url)
+        // var lol="<?php myphpfunction('"+roomNumberValue+"')?>";
+        // console.log(lol);
         // Nie wszystkie pola są zawsze używane w zależności od sali!
         const displayInfo = document.createElement("div");
         const roomNumber = document.createElement("p");
