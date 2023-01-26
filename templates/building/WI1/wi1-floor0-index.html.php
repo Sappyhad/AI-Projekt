@@ -99,7 +99,7 @@ function myphpfunction($id){
         displayInfo.idr = "displayInfo";
         document.getElementById("info").appendChild(displayInfo);
         room1.addEventListener("click", event=>{
-       location.href='index.php?action=wi1-floor-1-index';
+        location.href='index.php?action=wi1-floor-1-index';
     });
     
     }
