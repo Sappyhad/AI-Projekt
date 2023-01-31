@@ -22,126 +22,18 @@ ob_start(); ?>
 
     </ul>
 
-
-    <div>
-        <input type="radio" name="przycisk" id="pracownik" onclick="showPracownik()" >Pracownik</input>
+    <div id="employeeList" class="Lista"">
+        <div class="">
+            <h1 >Wyszukaj pracownika</h1></div>
+        <label for="employeeName">Nazwisko i Imię</label>
+        <input id="name" type="text" name="employeeName">
         <br>
-        <input type="radio" name="przycisk" id="sala"  onclick="showSala()">Sala</input>
-    </div>
-    <div id="employeeList" class="Lista" style="display: none;">
-        <form method="post">
-            <div class="">
-                <h1 >Wyszukaj pracownika</h1></div>
-            <input type="hidden" name="function" value="function1">
-            <label for="employeeName">Imię</label>
-            <input type="text" name="employeeName">
-            <br>
-
-            <label for="employeeSurname">Nazwisko</label>
-            <input type="text" name="employeeSurname">
-            <br>
-            <label for="date">Data</label>
-            <input type="date" name="date" id="date">
-            <br>
-            <label for="time">Godzina</label>
-            <input type="text" name="godzinaRozpoczecia">
-            <input type="text" name="godzinaZakonczenia">
-
-            <br>
-            <input type="submit">
-
-        </form>
-    </div>
-    <script>
-        var date = new Date();
-
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
-
-        if (month < 10) month = "0" + month;
-        if (day < 10) day = "0" + day;
-
-        var today = year + "-" + month + "-" + day;
-        document.getElementById("date").value = today;
-    </script>
-
-
-    <div id="roomList" class="Lista" style="display: none;">
-        <form method="POST">
-            <div class="">
-                <h1 >Wyszukaj Salę</h1></div>
-            <input type="hidden" name="function" value="function2">
-            <label for="roomNumber">Numer Sali</label>
-            <input type="text" name="roomNumber">
-            <br>
-            <label for="buildingNumber">Numer budynku</label>
-            <input type="text" name="buildingNumber">
-            <br>
-            <label for="date2">Data</label>
-            <input type="date" name="date2" id="date2">
-            <br>
-            <label for="time">Godzina</label>
-            <input type="text" name="godzinaRozpoczecia">
-            <input type="text" name="godzinaZakonczenia">
-
-            <br>
-
-            <input type="submit">
-
-        </form>
+        <button onclick="get_name()">Prześlij</button>
     </div>
 
-    <script>
-        var date = new Date();
-
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
-
-        if (month < 10) month = "0" + month;
-        if (day < 10) day = "0" + day;
-
-        var today = year + "-" + month + "-" + day;
-        document.getElementById("date2").value = today;
-    </script>
-    <script>
-        const targetDiv = document.getElementById("employeeList");
-        const btn = document.getElementById("pracownik");
-        const targetDiv2 = document.getElementById("roomList");
-        const btn2 = document.getElementById("sala");
-        const error2 = document.getElementById("error2");
-        let tabelaDane = document.getElementById("tabelaDane");
-        function showPracownik()
-        {
-            targetDiv.style.display = "block";
-            targetDiv2.style.display = "none";
-            error2.style.display="none";
-            tabelaDane.style.display="none";
-            tabelaDane.remove();
-        };
-
-
-        function showSala()
-        {
-            targetDiv.style.display = "none";
-            targetDiv2.style.display = "block";
-            error2.style.display="none";
-            tabelaDane.style.display="none";
-            tabelaDane.remove();
-
-        };
-
-
-    </script>
-
-    <style>
-
-        th, td {
-            border: 1px solid;
-
-        }
-    </style>
+    <div class="output">
+        <ul id="myList"></ul>
+    </div>
 
 
     <script>
@@ -163,7 +55,7 @@ ob_start(); ?>
                 .then((data) => {
 
                     console.log(data);
-                    
+
                     for(let i = 1; i < data.length; i++){
                         if(data[i].start.split('T')[0] == todayDay){
                             if((data[i].start.split('T')[1].slice(0,2) <= todayTime && data[i].end.split('T')[1].slice(0,2) >= todayTime) || data[i].start.split('T')[1].slice(0,2) >= todayTime){
@@ -193,6 +85,18 @@ ob_start(); ?>
                             }
                         }
                     }
+                    console.log("ZAJECIA INFO: ", zajeciaInfo);
+
+                    let list = document.getElementById("myList");
+
+                    zajeciaInfo.forEach((item)=>{
+                        let li = document.createElement("li");
+                        li.innerText = item;
+                        list.appendChild(li);
+                    })
+
+
+
                     // zajeciaInfo.push(data[1].start.split('T')[0]);
                     // zajeciaInfo.push(data[1].start.split('T')[1].slice(0,5));
                     // zajeciaInfo.push(data[1].end.split('T')[1].slice(0,5));
@@ -203,15 +107,20 @@ ob_start(); ?>
                     // }
 
                 })
-                .then((zajeciaInfo) => {
-                    console.log(zajeciaInfo)
-                    return zajeciaInfo
-                });
-
+                // .then((zajeciaInfo) => {
+                //
+                //
+                //     return zajeciaInfo
+                // });
 
         }
-        //żeby to działało trzeba jakoś ogarnąć returnowanie
-        zajecia('Karczmarczyk Artur');
+
+        function get_name(){
+            let name_n_surname = document.getElementById("name").value;
+
+            zajecia(name_n_surname);
+        }
+
     </script>
 <?php $main = ob_get_clean();
 
