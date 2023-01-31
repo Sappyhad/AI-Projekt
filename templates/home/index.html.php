@@ -10,6 +10,10 @@ else{
 
 $title = 'Home';
 
+
+
+
+
 ob_start(); ?>
 
     <ul class="index-list">
@@ -147,8 +151,7 @@ ob_start(); ?>
             let todayTime = today.getHours();
             let zajeciaInfo = [];
             //`https://plan.zut.edu.pl/schedule_student.php?teacher=${nazwa}&start=${today}`
-            // fetch(`https://cors-anywhere.herokuapp.com/https://plan.zut.edu.pl/schedule_student.php?teacher=${nazwa}&start=${todayDay}T${todayTime}`)
-            fetch(`https://plan.zut.edu.pl/schedule_student.php?teacher=${nazwa}&start=${today}`)
+            fetch(`https://cors-anywhere.herokuapp.com/https://plan.zut.edu.pl/schedule_student.php?teacher=${nazwa}&start=${todayDay}T${todayTime}`)
                 .then((response) => {
                     console.log(response);
                     //--> [object Response]
@@ -160,7 +163,7 @@ ob_start(); ?>
                 .then((data) => {
 
                     console.log(data);
-                    //sprawdzanie czy jest odpowiednia godzina, ale to zależy czy plan.zut updateuje jako 1 pozycję najbliższe / trwające zajęcia
+                    
                     for(let i = 1; i < data.length; i++){
                         if(data[i].start.split('T')[0] == todayDay){
                             if((data[i].start.split('T')[1].slice(0,2) <= todayTime && data[i].end.split('T')[1].slice(0,2) >= todayTime) || data[i].start.split('T')[1].slice(0,2) >= todayTime){
@@ -201,13 +204,14 @@ ob_start(); ?>
 
                 })
                 .then((zajeciaInfo) => {
+                    console.log(zajeciaInfo)
                     return zajeciaInfo
                 });
 
 
         }
         //żeby to działało trzeba jakoś ogarnąć returnowanie
-        zajecia('Sychel Dariusz');
+        zajecia('Karczmarczyk Artur');
     </script>
 <?php $main = ob_get_clean();
 
