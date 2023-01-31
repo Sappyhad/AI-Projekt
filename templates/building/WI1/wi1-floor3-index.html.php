@@ -29,7 +29,7 @@ function myphpfunction($id){
         <h1>NIE MA XD</h1>
     </div>
 
-    
+
 
 
 <?php $main = ob_get_clean();
