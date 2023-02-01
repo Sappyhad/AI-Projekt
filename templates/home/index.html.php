@@ -57,35 +57,34 @@ ob_start(); ?>
                     console.log(data);
 
                     for(let i = 1; i < data.length; i++){
-                        if(data[i].start.split('T')[0] == todayDay){
-                            if((data[i].start.split('T')[1].slice(0,2) <= todayTime && data[i].end.split('T')[1].slice(0,2) >= todayTime) || data[i].start.split('T')[1].slice(0,2) >= todayTime){
-                                zajeciaInfo.push(data[i].start.split('T')[0]);
-                                zajeciaInfo.push(data[i].start.split('T')[1].slice(0,5));
-                                zajeciaInfo.push(data[i].end.split('T')[1].slice(0,5));
-                                zajeciaInfo.push(data[i].title);
-                                zajeciaInfo.push(data[i].worker_title);
-                                if(data[i].room !== null){
-                                    zajeciaInfo.push(data[i].room);
+                        // if(data[i].start.split('T')[0] == todayDay){
+                        //     if((data[i].start.split('T')[1].slice(0,2) <= todayTime && data[i].end.split('T')[1].slice(0,2) >= todayTime) || data[i].start.split('T')[1].slice(0,2) >= todayTime){
+                        //         zajeciaInfo.push(data[i].start.split('T')[0]);
+                        //         zajeciaInfo.push(data[i].start.split('T')[1].slice(0,5));
+                        //         zajeciaInfo.push(data[i].end.split('T')[1].slice(0,5));
+                        //         zajeciaInfo.push(data[i].title);
+                        //         zajeciaInfo.push(data[i].worker_title);
+                        //         if(data[i].room !== null){
+                        //             zajeciaInfo.push(data[i].room);
+                        //         }
+                        //     }
+                        // }
+                            for(let i = 1; i < data.length; i++){
+                                if(data[i].start.split('T')[0] >= todayDay){
+                                    zajeciaInfo.push(data[i].start.split('T')[0]);
+                                    zajeciaInfo.push(data[i].start.split('T')[1].slice(0,5));
+                                    zajeciaInfo.push(data[i].end.split('T')[1].slice(0,5));
+                                    zajeciaInfo.push(data[i].title);
+                                    zajeciaInfo.push(data[i].worker_title);
+                                    if(data[i].room !== null){
+                                        zajeciaInfo.push(data[i].room);
+                                    }
                                 }
+                                zajeciaInfo.push("---------------------------------");
                             }
-                        }
+
                     }
-                    if(zajeciaInfo.length == 0){
-                        for(let i = 1; i < data.length; i++){
-                            if(data[i].start.split('T')[0] >= todayDay){
-                                zajeciaInfo.push(data[i].start.split('T')[0]);
-                                zajeciaInfo.push(data[i].start.split('T')[1].slice(0,5));
-                                zajeciaInfo.push(data[i].end.split('T')[1].slice(0,5));
-                                zajeciaInfo.push(data[i].title);
-                                zajeciaInfo.push(data[i].worker_title);
-                                if(data[i].room !== null){
-                                    zajeciaInfo.push(data[i].room);
-                                }
-                                break;
-                            }
-                        }
-                    }
-                    console.log("ZAJECIA INFO: ", zajeciaInfo);
+
 
                     let list = document.getElementById("myList");
 
