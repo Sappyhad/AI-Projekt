@@ -38,6 +38,7 @@ ob_start(); ?>
 
     <script>
         function zajecia(nazwa){
+
             let today = new Date();
             let todayDay = today.toISOString().slice(0, 10);
             let todayTime = today.getHours();
@@ -116,7 +117,8 @@ ob_start(); ?>
 
         function get_name(){
             let name_n_surname = document.getElementById("name").value;
-
+            let lista = document.getElementById("myList");
+            lista.innerHTML = ' ';
             zajecia(name_n_surname);
         }
 

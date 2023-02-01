@@ -16,12 +16,37 @@ else{
     <li><a href="<?= $router->generatePath('employees-index') ?>">Pracownicy</a></li>
     <li><a href="<?= $router->generatePath('employee-import') ?>">Import</a></li>
     <li>
-        <form action="<?= $router->generatePath('search') ?>" method="post">
-            <input type="text" name="search-value" placeholder="szukaj">
-            <input type="submit" value="Wyszukaj">
+        <form action="<?= $router->generatePath('employees-index') ?>" method="post">
+            <input id="searchBar" type="text" name="searchBar" placeholder="szukaj">
         </form>
     </li>
 </ul>
 
+<script>
+
+    const searchBar = document.getElementById("searchBar");
+    // searchBar.addEventListener("keyup", e => {
+    //     const searchString = e.target.value;
+    //     const filteredCharacters = hpCharacters.filter(character => {
+    //         return (
+    //             character.name.includes(searchString) ||
+    //             character.house.includes(searchString)
+    //         );
+    //     });
+    //     displayCharacters(filteredCharacters);
+    // });
+    searchBar.addEventListener("keyup", e => {
+        console.log(e);
+        // const searchString = e.target.value.toLowerCase();
+        // const filteredCharacters = hpCharacters.filter(character => {
+        //     return (
+        //         character.name.toLowerCase().includes(searchString) ||
+        //         character.house.toLowerCase().includes(searchString)
+        //     );
+        // });
+    });
+
+
+</script>
 
 <?php
